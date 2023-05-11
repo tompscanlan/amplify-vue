@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "firstapp": {}
+      },
+      "api": {
+        "firstapp": {}
       }
     }
   },
