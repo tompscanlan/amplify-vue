@@ -1,37 +1,14 @@
-<script setup>
-// import { Authenticator } from "@aws-amplify/ui-vue";
-// import "@aws-amplify/ui-vue/styles.css";
-
-import { Amplify } from 'aws-amplify';
-import awsconfig from './aws-exports';
-
-Amplify.configure(awsconfig);
-</script>
-
 <template>
   <h1>Url Shortener</h1>
 
   <div>
-    <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/about">About</router-link></li>
-      <li><router-link to="/bar">Bar</router-link></li>
-    </ul>
-    <router-view></router-view>
-</div>
-
-<div>
-  <form>
+    <form>
       <span>URL</span>
       <input v-model.trim="originalUrl" type="text" placeholder="Enter a URL to shorten">
       <span>URL is {{ originalUrl }}</span>
 
       <button v-on:click="shortenUrl">Shorter!</button>
-      <!-- <div v-for="item in todos" :key="item.id">
-                    <h3>{{ item.name }}</h3>
-                    <p>{{ item.description }}</p>
-                  </div>
-                   -->
+
     </form>
   </div>
 </template>
@@ -47,6 +24,7 @@ export default {
     console.log("in data()")
 
     return {
+      id: "asd?",
       originalUrl: "url",
       shortUrl: '1234',
       clicks: 0,
@@ -54,26 +32,23 @@ export default {
       createdOnDate: "??"
     }
   },
-  // async created() {
-  // },
+
   methods: {
+
     async shortenUrl() {
-      console.log("in shortenurl")
-      const { originalUrl,
-        // shortUrl,
-        // clicks,
-        // lastClickDate,
-        // createdOnDate 
-      }
-        = this;
+      const {
+        originalUrl
+      } = this;
+
       if (!originalUrl) {
-        console.log("no url!");
+        console.error("no url to shorten!");
       }
 
-      console.log("shortenoing: ", originalUrl)
+      console.debug(originalUrl)
       // console.log(createShortUrls)
 
       const shortUrlRecord = {
+        id: "asd?",
         originalUrl: originalUrl,
         shortUrl: '1234',
         clicks: 0,
@@ -81,34 +56,26 @@ export default {
         createdOnDate: "??"
       }
 
-      console.log("shortRec: ", shortUrlRecord)
-      console.log({
-          query: createShortUrls,
-          variables: { input: {shortUrlRecord} }
-        })
+      console.debug(structuredClone("shortRec: ", shortUrlRecord))
+      console.debug(structuredClone({ input: { shortUrlRecord } }))
 
       try {
 
         const resp = await API.graphql({
           query: createShortUrls,
-          variables: { input: {shortUrlRecord} }
+          variables: { input: { shortUrlRecord } }
         })
 
-        console.log("response:  ", resp)
+        console.debug("response:  ", structuredClone(resp))
       } catch (err) {
-        console.log("err:  ", err.errors[0])
+        console.debug("err:  ", structuredClone(err))
       }
-      console.log("end")
+      console.debug("end")
     }
 
   },
   computed: {
     console: () => console,
-  },
-  components: {
-    // AboutThis,
-    // HelloWorld,
-    // Router
   }
 };
 
