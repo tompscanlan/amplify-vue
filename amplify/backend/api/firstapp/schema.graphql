@@ -12,3 +12,11 @@
     content: String!
   }
   
+  type ShortUrls @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    originalUrl: String!
+    shortUrl: String!
+    clicks: Int!
+    lastClickDate: String
+    createdOnDate: String!
+  }
