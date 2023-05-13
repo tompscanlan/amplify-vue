@@ -4,10 +4,8 @@ import { schema } from './schema';
 
 
 
-const { Post, Comment, ShortUrls } = initSchema(schema);
+const { ShortUrls } = initSchema(schema);
 
 export {
-  Post,
-  Comment,
   ShortUrls
 };
